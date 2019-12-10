@@ -6,6 +6,7 @@ public class PlayerBullet : MonoBehaviour
 {
     public float speed = 7.5f;
     public Rigidbody2D theRb;
+    public GameObject impactEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,13 @@ public class PlayerBullet : MonoBehaviour
     // The arguement is the object we're colliding with
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Instantiate(impactEffect, transform.position, transform.rotation);
         // Destroy self
+        Destroy(gameObject);
+    }
+
+    private void OnBecameInvisible()
+    {
         Destroy(gameObject);
     }
 }
