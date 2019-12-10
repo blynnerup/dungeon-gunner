@@ -22,7 +22,7 @@ public class PlayerBullet : MonoBehaviour
     // The arguement is the object we're colliding with
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Destroy itself
+        // Destroy self
         Destroy(gameObject);
     }
 }
