@@ -18,4 +18,11 @@ public class PlayerBullet : MonoBehaviour
         // Move the bullet according to its own coordinates, so movement is always to the right, and movement in the world coords are based on it's rotation.
         theRb.velocity = transform.right * speed;
     }
+
+    // The arguement is the object we're colliding with
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Destroy itself
+        Destroy(gameObject);
+    }
 }
