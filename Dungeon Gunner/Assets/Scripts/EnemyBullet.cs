@@ -6,6 +6,8 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed;
     private Vector3 direction;
+    public int damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
+            PlayerHealthController.instance.DamagePlayer();
         }
 
         Destroy(gameObject);
