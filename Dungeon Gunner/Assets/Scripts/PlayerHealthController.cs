@@ -39,7 +39,7 @@ public class PlayerHealthController : MonoBehaviour
     }
 
     public void DamagePlayer()
-    {
+    {        
         if(invincCount <= 0)
         {
             currentHealth--;
@@ -55,6 +55,11 @@ public class PlayerHealthController : MonoBehaviour
             }
         }
 
-        
+    }
+
+    public void MakeInvicible(float length)
+    {
+        invincCount = length;
+        PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, 0.5f);
     }
 }

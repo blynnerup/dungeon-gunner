@@ -7,7 +7,12 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     public float moveSpeed;
+    private float activeMovesSpeed;
+    public float dashSpeed = 8f, dashLength = .5f, dashCooldown = 5f, dashInvicibility = .5f;
+    private float dashCounter, dashCoolCounter;
+
     private Vector2 moveInput;
+
     public Rigidbody2D theRb;
     public Transform gunArm;
     private Camera theCam;
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
         theRb.constraints = RigidbodyConstraints2D.FreezeRotation;
         // Optimization - never call the camera locally each time. Instantiate it once!
         theCam = Camera.main;
+        activeMovesSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -41,7 +47,7 @@ public class PlayerController : MonoBehaviour
         moveInput.Normalize();
 
         // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
-        theRb.velocity = moveInput * moveSpeed;
+        theRb.velocity = moveInput * activeMovesSpeed;
 
         Vector3 mousePos = Input.mousePosition;
         Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
@@ -80,6 +86,33 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if(dashCoolCounter <= 0 && dashCounter <= 0)
+            {
+                activeMovesSpeed = dashSpeed;
+                dashCounter = dashLength;
+
+                anim.SetTrigger("dash");
+
+                PlayerHealthController.instance.MakeInvicible(dashInvicibility);
+            }
+        }
+
+        if(dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+            if(dashCounter <= 0)
+            {
+                activeMovesSpeed = moveSpeed;
+                dashCoolCounter = dashCooldown;
+            }
+        }
+
+        if (dashCoolCounter > 0)
+        {
+            dashCoolCounter -= Time.deltaTime;
+        }
 
         if(moveInput != Vector2.zero)
         {
