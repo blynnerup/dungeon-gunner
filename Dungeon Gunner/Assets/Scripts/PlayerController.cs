@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private float activeMovesSpeed;
     public float dashSpeed = 8f, dashLength = .5f, dashCooldown = 5f, dashInvicibility = .5f;
-    private float dashCounter, dashCoolCounter;
+    private float dashCoolCounter;
+    [HideInInspector]
+    public float dashCounter;
 
     private Vector2 moveInput;
 
