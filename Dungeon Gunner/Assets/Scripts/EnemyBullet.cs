@@ -25,6 +25,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            AudioManager.instance.PlaySFX(4);
             PlayerHealthController.instance.DamagePlayer();
         }
 

@@ -25,6 +25,7 @@ public class PlayerBullet : MonoBehaviour
     // The arguement is the object we're colliding with
     private void OnTriggerEnter2D(Collider2D other)
     {
+        AudioManager.instance.PlaySFX(4);
         if (other.tag == "Enemy")
             other.GetComponent<EnemyController>().DamageEnemy(damageToGive);
         else
