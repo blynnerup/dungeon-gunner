@@ -39,7 +39,7 @@ public class Room : MonoBehaviour
                     door.SetActive(false);
 
                     closeWhenEntered = false;
-                }
+                } 
             }
         }
     }
