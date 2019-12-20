@@ -11,6 +11,10 @@ public class UIController : MonoBehaviour
     public Text healthText;
     public GameObject deathScreen;
 
+    public Image fadeScreen;
+    public float fadeSpeed;
+    private bool fadeToBlack, fadeOutBlack;
+
     private void Awake()
     {
         instance = this;
@@ -19,7 +23,8 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            
+        fadeOutBlack = true;
+        fadeToBlack = false;
     }
 
     // Update is called once per frame

@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private float shotCounter;
 
     public SpriteRenderer bodySR;
+    [HideInInspector]
+    public bool canMove = true;
 
     private void Awake()
     {
@@ -43,88 +45,95 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-
-        moveInput.Normalize();
-
-        // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
-        theRb.velocity = moveInput * activeMovesSpeed;
-
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
-        Vector2 offSet = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
-
-        if(mousePos.x < screenPoint.x)
+        if (canMove)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            gunArm.localScale = new Vector3(-1f, -1f, 1f);
-        }
-        else
-        {
-            transform.localScale = Vector3.one;
-            gunArm.localScale = Vector3.one;
-        }
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
 
-        // Rotate gun arm
-        float angle = Mathf.Atan2(offSet.y, offSet.x) * Mathf.Rad2Deg;
-        gunArm.rotation = Quaternion.Euler(0f, 0f, angle);
+            moveInput.Normalize();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-            shotCounter = timeBetweenShots;
-            AudioManager.instance.PlaySFX(13);
-        }
+            // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
+            theRb.velocity = moveInput * activeMovesSpeed;
 
-        if (Input.GetMouseButton(0))
-        {
-            shotCounter -= Time.deltaTime;
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+            Vector2 offSet = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
 
-            if (shotCounter <= 0)
+            if (mousePos.x < screenPoint.x)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+                gunArm.localScale = new Vector3(-1f, -1f, 1f);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+                gunArm.localScale = Vector3.one;
+            }
+
+            // Rotate gun arm
+            float angle = Mathf.Atan2(offSet.y, offSet.x) * Mathf.Rad2Deg;
+            gunArm.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                AudioManager.instance.PlaySFX(13);
-
                 shotCounter = timeBetweenShots;
+                AudioManager.instance.PlaySFX(13);
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(dashCoolCounter <= 0 && dashCounter <= 0)
+            if (Input.GetMouseButton(0))
             {
-                activeMovesSpeed = dashSpeed;
-                dashCounter = dashLength;
+                shotCounter -= Time.deltaTime;
 
-                anim.SetTrigger("dash");
-                AudioManager.instance.PlaySFX(8);
+                if (shotCounter <= 0)
+                {
+                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                    AudioManager.instance.PlaySFX(13);
 
-                PlayerHealthController.instance.MakeInvicible(dashInvicibility);
+                    shotCounter = timeBetweenShots;
+                }
             }
-        }
 
-        if(dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-            if(dashCounter <= 0)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                activeMovesSpeed = moveSpeed;
-                dashCoolCounter = dashCooldown;
+                if (dashCoolCounter <= 0 && dashCounter <= 0)
+                {
+                    activeMovesSpeed = dashSpeed;
+                    dashCounter = dashLength;
+
+                    anim.SetTrigger("dash");
+                    AudioManager.instance.PlaySFX(8);
+
+                    PlayerHealthController.instance.MakeInvicible(dashInvicibility);
+                }
             }
-        }
 
-        if (dashCoolCounter > 0)
-        {
-            dashCoolCounter -= Time.deltaTime;
-        }
+            if (dashCounter > 0)
+            {
+                dashCounter -= Time.deltaTime;
+                if (dashCounter <= 0)
+                {
+                    activeMovesSpeed = moveSpeed;
+                    dashCoolCounter = dashCooldown;
+                }
+            }
 
-        if(moveInput != Vector2.zero)
+            if (dashCoolCounter > 0)
+            {
+                dashCoolCounter -= Time.deltaTime;
+            }
+
+            if (moveInput != Vector2.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
+        } else
         {
-            anim.SetBool("isMoving", true);
-        } 
-        else
-        {
+            theRb.velocity = Vector2.zero;
             anim.SetBool("isMoving", false);
         }
     }
