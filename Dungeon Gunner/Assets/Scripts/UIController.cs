@@ -30,6 +30,28 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (fadeOutBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+            if(fadeScreen.color.a == 0f)
+            {
+                fadeOutBlack = false;
+            }
+        }
+
+        if (fadeToBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            if (fadeScreen.color.a == 1f)
+            {
+                fadeToBlack = false;
+            }
+        }
+    }
+
+    public void StartFadeToBlack()
+    {
+        fadeToBlack = true;
+        fadeOutBlack = false;
     }
 }
