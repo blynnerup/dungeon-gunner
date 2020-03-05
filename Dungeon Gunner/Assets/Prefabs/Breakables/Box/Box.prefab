@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -108,7 +109,9 @@ MonoBehaviour:
   itemsToDrop:
   - {fileID: 6944686148916275668, guid: 30ac97f8d4d7d094bac7819f2e3e375b, type: 3}
   - {fileID: 1947501397849010114, guid: 517b1abeb60d32a468e480869cdd9965, type: 3}
-  itemDropPercent: 35
+  - {fileID: 8750671054608027277, guid: f735bc5ec54346944986ea514ae0d024, type: 3}
+  - {fileID: 8750671054608027277, guid: f735bc5ec54346944986ea514ae0d024, type: 3}
+  itemDropPercent: 100
 --- !u!61 &9068672746777049301
 BoxCollider2D:
   m_ObjectHideFlags: 0

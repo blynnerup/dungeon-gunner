@@ -42,6 +42,10 @@ public class EnemyController : MonoBehaviour
     public GameObject[] deathSplatters;
     public GameObject impactEffect;
 
+    public bool shouldDropItem;
+    public GameObject[] itemsToDrop;
+    public float itemDropPercent;
+
 
     // Start is called before the first frame update
     void Start()
@@ -155,8 +159,21 @@ public class EnemyController : MonoBehaviour
             AudioManager.instance.PlaySFX(1);
             int selectSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 4);
-
+            Debug.Log("dmg");
             Instantiate(deathSplatters[selectSplatter], transform.position, Quaternion.Euler(0f,0f, rotation * 90));
+
+            // Drop items
+            if (shouldDropItem)
+            {
+                Debug.Log("Drop");
+                float dropChance = Random.Range(0, 100f);
+
+                if (dropChance < itemDropPercent)
+                {
+                    int randomItem = Random.Range(0, itemsToDrop.Length);
+                    Instantiate(itemsToDrop[randomItem], transform.position, transform.rotation);
+                }
+            }
         }
     }
 }
