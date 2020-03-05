@@ -8,8 +8,14 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
+    [Header("Health Elements")]
     public Slider healthSlider;
     public Text healthText;
+
+    [Header("Coin Elements")]
+    public Text cointText;
+
+    [Space(20)]
     public GameObject deathScreen;
 
     public Image fadeScreen;

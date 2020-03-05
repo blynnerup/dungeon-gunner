@@ -22,27 +22,7 @@ public class Room : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (enemies.Count > 0 && roomActive)
-        //{
-        //    for (int i = 0; i < enemies.Count; i++)
-        //    {
-        //        if (enemies[i] == null)
-        //        {
-        //            enemies.RemoveAt(i);
-        //            i--;
-        //        }
-        //    }
 
-        //    if (enemies.Count == 0)
-        //    {
-        //        foreach(GameObject door in doors)
-        //        {
-        //            door.SetActive(false);
-
-        //            closeWhenEntered = false;
-        //        } 
-        //    }
-        //}
     }
 
     public void OpenDoors()
