@@ -11,6 +11,8 @@ public class ShopItem : MonoBehaviour
     public bool isHealthRestore, isHealthUpgrade, isWeapon;
     public int itemCost;
 
+    public int upgradeHealthAmount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,20 @@ public class ShopItem : MonoBehaviour
                     {
                         PlayerHealthController.instance.HealPlayer(PlayerHealthController.instance.maxHealth);
                     }
+
+                    if (isHealthUpgrade)
+                    {
+                        PlayerHealthController.instance.IncreaseMaxHealth(upgradeHealthAmount);
+                    }
+
+                    gameObject.SetActive(false);
+                    inBuyZone = false;
+
+                    AudioManager.instance.PlaySFX(18);
+                }
+                else
+                {
+                    AudioManager.instance.PlaySFX(19);
                 }
             }
         }
@@ -47,7 +63,7 @@ public class ShopItem : MonoBehaviour
 
     }
 
-    private void OnTriggerExit(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

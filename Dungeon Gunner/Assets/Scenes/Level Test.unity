@@ -240,7 +240,7 @@ PrefabInstance:
         type: 3}
       propertyPath: potentialCenters.Array.data[1]
       value: 
-      objectReference: {fileID: 4471093507343598726, guid: 46053758078476846a51835d5ae28aba,
+      objectReference: {fileID: 2234438720811353565, guid: 58b7f2b10f6ccf141b96559ea0a8f9b1,
         type: 3}
     - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
         type: 3}
@@ -270,7 +270,49 @@ PrefabInstance:
         type: 3}
       propertyPath: potentialCenters.Array.data[6]
       value: 
-      objectReference: {fileID: 8023162548374661661, guid: 5b175b3653bd5964186033549760837a,
+      objectReference: {fileID: 8743646807630874255, guid: 5b175b3653bd5964186033549760837a,
+        type: 3}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: shopColor.r
+      value: 0.8660097
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: shopColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: shopColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: minDistanceToShop
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: maxDistanceToShop
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: includeShop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: potentialCenters.Array.data[0]
+      value: 
+      objectReference: {fileID: 831524070945259757, guid: 46053758078476846a51835d5ae28aba,
+        type: 3}
+    - target: {fileID: 5167978484064695524, guid: cc5efdff951c17f4388037eab706672f,
+        type: 3}
+      propertyPath: centerShop
+      value: 
+      objectReference: {fileID: 1836181155036554259, guid: 2db1d277290289842b0133c33edd4a97,
         type: 3}
     - target: {fileID: 5167978484064695525, guid: cc5efdff951c17f4388037eab706672f,
         type: 3}
